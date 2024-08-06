@@ -17,4 +17,18 @@ def promotions_list(request):
             serializer.save()
             return Response(status=status.HTTP_201_CREATED)
         else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors, 
+                            status=status.HTTP_400_BAD_REQUEST)
+
+# promotions/2/
+
+@api_view(['GET'])
+def detail_promotion(request, pk):
+    try:
+        promotion = Promotion.objects.get(pk=pk)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        serializer = PromotionSerializer(promotion)
+        return Response(serializer.data, status=status.HTTP_200_OK)
