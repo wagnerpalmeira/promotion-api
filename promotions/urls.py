@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import promotions_list, detail_promotion
+from .views import PromotionAPIView, PromotionDetailAPIView
 
 app_name = 'promotions'
 
 urlpatterns = [
-    path('promotions/', promotions_list),
-    path('promotions/<int:pk>/', detail_promotion)
+    path('promotions/', PromotionAPIView.as_view()),
+    path('promotions/<int:pk>/', PromotionDetailAPIView.as_view())
 ]
