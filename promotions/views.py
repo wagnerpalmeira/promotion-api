@@ -5,6 +5,19 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from django.http import Http404
+from rest_framework.viewsets import ModelViewSet
+from rest_framework import filters
+
+from rest_framework.permissions import IsAuthenticated
+
+
+
+class PromotionViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    queryset = Promotion.objects.all()
+    serializer_class = PromotionSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title']
 
 class PromotionAPIView(APIView):
 
